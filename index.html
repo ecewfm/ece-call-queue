@@ -803,7 +803,7 @@ input:focus,select:focus{border-color:#2563eb;box-shadow:0 0 0 2px #dbeafe}
 // ══════════════════════════════════════════════════════════════════════════════
 // API CONFIG — REPLACE THIS WITH YOUR APPS SCRIPT WEB APP URL
 // ══════════════════════════════════════════════════════════════════════════════
-var APPS_SCRIPT_URL = 'https://script.google.com/a/macros/ececontactcenters.com/s/AKfycby4g7tNslnTqtmpvNhAdoD7Xyj04FuKjpR_iw65dtOUB_-_60j2RTpYAcXxkeQlelFk/exec';
+var APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
 // API call helper — mimics google.script.run interface for minimal code changes
 function apiCall(fnName, params, onSuccess, onFailure) {
@@ -2326,13 +2326,17 @@ function submitBulkUpload(){
 }
 
 // ── Boot ─────────────────────────────────────────────────────────────────────
-window.addEventListener('load',function(){
-  // Start the unified tick immediately — clock works before login
+// ── Boot — show login immediately, don't wait for iframes to load ────────────
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', bootApp);
+} else {
+  bootApp(); // DOM already ready
+}
+function bootApp(){
   ensureTickRunning();
-  // Hide loading screen, show login
   document.getElementById('loading-screen').style.display='none';
   document.getElementById('s-login').classList.add('active');
-});
+}
 </script>
 </body>
 </html>
